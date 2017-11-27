@@ -15,11 +15,11 @@ def get_parser():
     """ 解析命令行参数
     """
     parser = argparse.ArgumentParser(description='TreeMap-Generator CLI Tools.')
-    parser.add_argument('-o', '--output', type=str,
-                        help='output html file path')
     parser.add_argument('-i', '--input', type=str,
                         help='input json data path')
-    parser.add_argument('-d', '--direction', type=str,
+    parser.add_argument('-o', '--output', type=str, default="TreeMap.html",
+                        help='output html file path')
+    parser.add_argument('-d', '--direction', type=str, default="LR",
                         help='direction of TreeMap, '
                              'it can be LR/RL/H/TB/BT/V.(default LR)')
     parser.add_argument('-v', '--version', action='store_true',
@@ -41,37 +41,30 @@ def command_line_runner():
         parser.print_help()
     else:
         render(
-            path=args["output"] or "TreeMap.html",
-            direction=args["direction"] or "LR",
-            data=get_data(args['input'])
+            input=args['input'],
+            output=args["output"],
+            direction=args["direction"],
         )
 
 
-def get_data(path):
-    """ 读取数据
+def render(input, direction="LR", output="TreeMap.html"):
+    """ 渲染数据生成网页
 
-    :param path: 数据路径
+    :param input: 输入 json 文件路径
+    :param direction: 树图方向，有 LR/RL/H/TB/BT/V 可选
+    :param output: 输出 html 文件路径
     """
-    data = ""
+    json_data = ""
     try:
-        with open(path, "r", encoding="utf8") as fread:
-            data = fread.read()
+        with open(input, "r", encoding="utf8") as fread:
+            json_data = fread.read()
     except FileNotFoundError:
         print("File Not Found!")
-    return data
 
-
-def render(path, direction, data=None):
-    """ 渲染模板生成网页
-
-    :param path: 文件保存路径，默认为 'TreeMap.html'
-    :param direction: 树图方向，有（LR/RL/H/TB/BT/V）可选，默认为 'LR'
-    :param data: json 数据
-    """
     try:
-        with open(path, "w+", encoding="utf-8") as fout:
+        with open(output, "w+", encoding="utf-8") as fout:
             fout.write(
-                TPL.render(direction=direction, json_data=data))
+                TPL.render(direction=direction, json_data=json_data))
     except OSError:
         print("Invalid file path!")
 
