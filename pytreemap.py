@@ -18,7 +18,7 @@ def get_parser():
     parser.add_argument('-i', '--input', type=str,
                         help='input json data path')
     parser.add_argument('-o', '--output', type=str, default="TreeMap.html",
-                        help='output html file path')
+                        help='output html file path.(default ./TreeMap.html)')
     parser.add_argument('-d', '--direction', type=str, default="LR",
                         help='direction of TreeMap, '
                              'it can be LR/RL/H/TB/BT/V.(default LR)')
