@@ -60,7 +60,7 @@ def render(input, direction="LR", output="TreeMap.html", type=None):
     :param input: 输入 json 文件路径
     :param direction: 树图方向，有 LR/RL/H/TB/BT/V 可选
     :param output: 输出 html 文件路径
-    :param output: 树图类型
+    :param type: 树图类型
     """
     shape = "smooth"
     vgap, hgap = 10, 100
