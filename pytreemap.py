@@ -15,7 +15,7 @@ def get_parser():
     """ 解析命令行参数
     """
     parser = argparse.ArgumentParser(
-        description='树图生成工具-利用 JSON 数据生成 HTML 格式的树图',
+        description='树图渲染命令行工具-利用 JSON 数据生成 HTML 格式的树图',
         add_help=False)
     parser.add_argument('-i', '--input', type=str,
                         help='JSON 数据路径.')
