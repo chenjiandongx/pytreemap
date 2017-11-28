@@ -14,19 +14,22 @@ VERSION = "VERSION 0.0.1"
 def get_parser():
     """ 解析命令行参数
     """
-    parser = argparse.ArgumentParser(description='TreeMap-Generator CLI Tools.')
+    parser = argparse.ArgumentParser(
+        description='树图生成工具-利用 JSON 数据生成 HTML 格式的树图',
+        add_help=False)
     parser.add_argument('-i', '--input', type=str,
-                        help='input json data path')
+                        help='JSON 数据路径.')
     parser.add_argument('-o', '--output', type=str, default="TreeMap.html",
-                        help='output html file path.(default ./TreeMap.html)')
+                        help='输出 HTML 文件路径.(默认为`.\TreeMap.html`)')
     parser.add_argument('-d', '--direction', type=str, default="LR",
-                        help='direction of TreeMap, '
-                             'it can be LR/RL/H/TB/BT/V.(default LR)')
+                        help='树图的布局方向, '
+                             '有 LR/RL/H/TB/BT/V 可选.(默认为 LR)')
     parser.add_argument('-t', '--type', type=int, default=1,
-                        help='type of TreeMap, 1.CompactBoxTree '
-                             '2.IndentedTree 3.Dendrogram (default 1)')
+                        help='树图类型, 1.分层树 2.缩进树 3.生态树.(默认为 1)')
     parser.add_argument('-v', '--version', action='store_true',
-                        help='version information.')
+                        help='版本信息')
+    parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
+                        help='帮助页面')
     return parser
 
 
