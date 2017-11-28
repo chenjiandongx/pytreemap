@@ -110,31 +110,31 @@ A----|                         |
 
 #### 生成树图
 
-接下来之执行 ```pytm-cli -i data.json -o demo.html``，然后用浏览器打开根目录下的 demo.html 文件，就可以看到已经生产了这样的一张图了
+接下来之执行 ```pytm-cli -i data.json -o demo.html```，然后用浏览器打开根目录下的 demo.html 文件，就可以看到已经生产了这样的一张图了
 
 ![](https://github.com/chenjiandongx/pytreemap/blob/master/screenshot/screenshot-0.png)
 
 当指定 -t/--type 参数分别为 2 3 时，得到的图是这样的
 
-type 为 2
+**type 为 2**
 
 ![](https://github.com/chenjiandongx/pytreemap/blob/master/screenshot/screenshot-1.png)
 
-type 为 3
+**type 为 3**
 
 ![](https://github.com/chenjiandongx/pytreemap/blob/master/screenshot/screenshot-2.png)
 
 其余参数尝试一下就知道效果了，这里提供官网提供的 [数据](https://github.com/chenjiandongx/pytreemap/blob/master/json/data.json) 生产的效果
 
-```pytm-cli -i data.json``
+```pytm-cli -i data.json```
 
 ![](https://github.com/chenjiandongx/pytreemap/blob/master/screenshot/screenshot-3.png)
 
-```pytm-cli -i data.json -d H``
+```pytm-cli -i data.json -d H```
 
 ![](https://github.com/chenjiandongx/pytreemap/blob/master/screenshot/screenshot-4.png)
 
-```pytm-cli -i data.json -t 3``
+```pytm-cli -i data.json -t 3```
 
 ![](https://github.com/chenjiandongx/pytreemap/blob/master/screenshot/screenshot-5.png)
 
@@ -143,7 +143,7 @@ type 为 3
 ```python
 from pytreemap import render
 
-render('data.json', type, direction, outpath)
+render(input, type=None, direction=None, output=None)
 ```
 
 ### MIT 许可证
