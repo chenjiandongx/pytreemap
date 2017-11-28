@@ -1,6 +1,8 @@
 # 树图渲染命令行工具
-本项目打包了 [antvis/g6](https://github.com/antvis/g6)，利用 JSON 数据生成 HTML 格式的树图
 
+[![PyPI version](https://badge.fury.io/py/pytm-cli.svg)](https://badge.fury.io/py/torrent-cli) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+本项目打包了 [antvis/g6](https://github.com/antvis/g6)，利用 JSON 数据生成 HTML 格式的树图
 
 ### 安装
 #### pip 安装
@@ -143,7 +145,12 @@ A----|                         |
 ```python
 from pytreemap import render
 
-render(input, type=None, direction=None, output=None)
+render(input, direction=None, output=None, type=None)
+
+:param input: 输入 json 文件路径
+:param direction: 树图方向，有 LR/RL/H/TB/BT/V 可选
+:param output: 输出 html 文件路径
+:param type: 树图类型
 ```
 
 ### MIT 许可证
