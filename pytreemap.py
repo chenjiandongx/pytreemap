@@ -43,18 +43,6 @@ def command_line_runner():
         print(VERSION)
         return
 
-    shape = "smooth"
-    vgap, hgap = 10, 100
-
-    if args['type'] == 2:
-        shape = 'VH'
-        layout = 'IndentedTree'
-        vgap, hgap = 5, 18
-    elif args['type'] == 1:
-        layout = 'CompactBoxTree'
-    else:
-        layout = 'Dendrogram'
-
     if not args['input']:
         parser.print_help()
     else:
@@ -62,17 +50,30 @@ def command_line_runner():
             input=args['input'],
             output=args["output"],
             direction=args["direction"],
-            kwargs=locals(),
+            tmtype=args['type'],
         )
 
 
-def render(input, direction="LR", output="TreeMap.html", kwargs=None):
+def render(input, direction="LR", output="TreeMap.html", tmtype=None):
     """ 渲染数据生成网页
 
     :param input: 输入 json 文件路径
     :param direction: 树图方向，有 LR/RL/H/TB/BT/V 可选
     :param output: 输出 html 文件路径
+    :param output: 树图类型
     """
+    shape = "smooth"
+    vgap, hgap = 10, 100
+
+    if tmtype == 2:
+        shape = 'VH'
+        layout = 'IndentedTree'        # 缩进树
+        vgap, hgap = 5, 18
+    elif tmtype == 1:
+        layout = 'CompactBoxTree'      # 分层树
+    else:
+        layout = 'Dendrogram'          # 生态树
+
     json_data = ""
     try:
         with open(input, "r", encoding="utf8") as fread:
@@ -85,11 +86,10 @@ def render(input, direction="LR", output="TreeMap.html", kwargs=None):
             fout.write(
                 TPL.render(direction=direction,
                            json_data=json_data,
-                           vgap=kwargs['vgap'],
-                           hgap=kwargs['hgap'],
-                           shape=kwargs['shape'],
-                           layout=kwargs['layout']
-                           ))
+                           vgap=vgap,
+                           hgap=hgap,
+                           shape=shape,
+                           layout=layout))
     except OSError:
         print("文件保存失败!")
 
