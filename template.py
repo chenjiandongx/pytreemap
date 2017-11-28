@@ -46,15 +46,18 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
         const tree = new G6.Tree({
             id: 'myTreeMap', // 容器ID
             height: window.innerHeight || document.body.clientHeight,
-            fitView: "cc",
+            fitView: "autoZoom",
+            layoutFn: G6.Layouts.{{ layout }},
             layoutCfg: {
                 direction: "{{ direction }}", // 方向（LR/RL/H/TB/BT/V）
+                indent: 40,
                 getHGap: function( /* d */ ) { // 横向间距
-                    return 100;
+                    return {{ hgap }};
                 },
-                getVGap: function( /* d */ ) { // 竖向间距
-                    return 10;
+                getVGap: function( /* d */ ) { // 横向间距
+                    return {{ vgap }};
                 },
+             
             },
         });
         tree.source(
@@ -67,7 +70,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
             .style({
                 fillOpacity: 1
             });
-        tree.edge().shape('smooth');
+        tree.edge().shape('{{ shape }}');
         tree.render();
     </script>
 </body>

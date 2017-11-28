@@ -22,6 +22,9 @@ def get_parser():
     parser.add_argument('-d', '--direction', type=str, default="LR",
                         help='direction of TreeMap, '
                              'it can be LR/RL/H/TB/BT/V.(default LR)')
+    parser.add_argument('-t', '--type', type=int, default=1,
+                        help='type of TreeMap, 1.CompactBoxTree '
+                             '2.IndentedTree 3.Dendrogram (default 1)')
     parser.add_argument('-v', '--version', action='store_true',
                         help='version information.')
     return parser
@@ -37,6 +40,18 @@ def command_line_runner():
         print(VERSION)
         return
 
+    shape = "smooth"
+    vgap, hgap = 10, 100
+
+    if args['type'] == 2:
+        shape = 'VH'
+        layout = 'IndentedTree'
+        vgap, hgap = 5, 18
+    elif args['type'] == 1:
+        layout = 'CompactBoxTree'
+    else:
+        layout = 'Dendrogram'
+
     if not args['input']:
         parser.print_help()
     else:
@@ -44,10 +59,11 @@ def command_line_runner():
             input=args['input'],
             output=args["output"],
             direction=args["direction"],
+            kwargs=locals(),
         )
 
 
-def render(input, direction="LR", output="TreeMap.html"):
+def render(input, direction="LR", output="TreeMap.html", kwargs=None):
     """ 渲染数据生成网页
 
     :param input: 输入 json 文件路径
@@ -64,7 +80,13 @@ def render(input, direction="LR", output="TreeMap.html"):
     try:
         with open(output, "w+", encoding="utf-8") as fout:
             fout.write(
-                TPL.render(direction=direction, json_data=json_data))
+                TPL.render(direction=direction,
+                           json_data=json_data,
+                           vgap=kwargs['vgap'],
+                           hgap=kwargs['hgap'],
+                           shape=kwargs['shape'],
+                           layout=kwargs['layout']
+                           ))
     except OSError:
         print("Invalid file path!")
 
