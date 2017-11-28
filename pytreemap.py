@@ -78,7 +78,7 @@ def render(input, direction="LR", output="TreeMap.html", kwargs=None):
         with open(input, "r", encoding="utf8") as fread:
             json_data = fread.read()
     except FileNotFoundError:
-        print("File Not Found!")
+        print("路径错误!")
 
     try:
         with open(output, "w+", encoding="utf-8") as fout:
@@ -91,7 +91,7 @@ def render(input, direction="LR", output="TreeMap.html", kwargs=None):
                            layout=kwargs['layout']
                            ))
     except OSError:
-        print("Invalid file path!")
+        print("文件保存失败!")
 
 
 if __name__ == "__main__":
