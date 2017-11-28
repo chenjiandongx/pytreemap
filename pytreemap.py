@@ -50,11 +50,11 @@ def command_line_runner():
             input=args['input'],
             output=args["output"],
             direction=args["direction"],
-            tmtype=args['type'],
+            type=args['type'],
         )
 
 
-def render(input, direction="LR", output="TreeMap.html", tmtype=None):
+def render(input, direction="LR", output="TreeMap.html", type=None):
     """ 渲染数据生成网页
 
     :param input: 输入 json 文件路径
@@ -65,11 +65,11 @@ def render(input, direction="LR", output="TreeMap.html", tmtype=None):
     shape = "smooth"
     vgap, hgap = 10, 100
 
-    if tmtype == 2:
+    if type == 2:
         shape = 'VH'
         layout = 'IndentedTree'        # 缩进树
         vgap, hgap = 5, 18
-    elif tmtype == 1:
+    elif type == 1:
         layout = 'CompactBoxTree'      # 分层树
     else:
         layout = 'Dendrogram'          # 生态树
