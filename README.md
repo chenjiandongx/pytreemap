@@ -11,7 +11,7 @@ $ pip install pytm-cli
 #### 源码安装
 ```
  $ git clone https://github.com/chenjiandongx/pytreemap.git
- $ cd torrent-cli
+ $ cd pytreemap
  $ pip install -r requirements.txt
  $ python setup.py install
  ```
