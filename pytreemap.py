@@ -8,7 +8,7 @@ from template import TEMPLATE
 
 TPL = Environment().from_string(TEMPLATE)
 
-VERSION = "VERSION 0.0.1"
+VERSION = "VERSION 0.0.2"
 
 
 def get_parser():
@@ -26,6 +26,8 @@ def get_parser():
                              '有 LR/RL/H/TB/BT/V 可选.(默认为 LR)')
     parser.add_argument('-t', '--type', type=int, default=1,
                         help='树图类型, 1.分层树 2.缩进树 3.生态树.(默认为 1)')
+    parser.add_argument('-I', '--indent', type=int, default=40,
+                        help='缩进树的缩进量.(默认为 40)')
     parser.add_argument('-v', '--version', action='store_true',
                         help='版本信息')
     parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
@@ -50,16 +52,22 @@ def command_line_runner():
             input=args['input'],
             output=args["output"],
             direction=args["direction"],
+            indent=args['indent'],
             type=args['type'],
         )
 
 
-def render(input, direction="LR", output="TreeMap.html", type=None):
+def render(input,
+           output="TreeMap.html",
+           direction="LR",
+           indent=40,
+           type=None):
     """ 渲染数据生成网页
 
     :param input: 输入 json 文件路径
     :param direction: 树图方向，有 LR/RL/H/TB/BT/V 可选
     :param output: 输出 html 文件路径
+    :param indent: 缩进树缩进量
     :param type: 树图类型
     """
     shape = "smooth"
@@ -89,6 +97,7 @@ def render(input, direction="LR", output="TreeMap.html", type=None):
                            vgap=vgap,
                            hgap=hgap,
                            shape=shape,
+                           indent=indent,
                            layout=layout))
     except OSError:
         print("文件保存失败!")

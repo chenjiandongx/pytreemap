@@ -50,7 +50,7 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
             layoutFn: G6.Layouts.{{ layout }},
             layoutCfg: {
                 direction: "{{ direction }}", // 方向（LR/RL/H/TB/BT/V）
-                indent: 40,
+                indent: {{ indent }},
                 getHGap: function( /* d */ ) { // 横向间距
                     return {{ hgap }};
                 },

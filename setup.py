@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name='pytm-cli',
-    version="0.0.1",
+    version="0.0.2",
     description="树图渲染命令行工具-利用 JSON 数据生成 HTML 格式的树图",
     url='https://github.com/chenjiandongx/pytm-cli',
     author_email='chenjiandongx@qq.com',
