@@ -1,8 +1,6 @@
-# 树图渲染命令行工具
+# 树图渲染命令行工具 [![PyPI version](https://badge.fury.io/py/pytm-cli.svg)](https://badge.fury.io/py/torrent-cli) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![PyPI version](https://badge.fury.io/py/pytm-cli.svg)](https://badge.fury.io/py/torrent-cli) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-本项目打包了 [antvis/g6](https://github.com/antvis/g6)，利用 JSON 数据生成 HTML 格式的树图
+> pytreemap 封装了 [antvis/g6](https://github.com/antvis/g6)，利用 JSON 数据生成 HTML 格式的树图
 
 ### 安装
 #### pip 安装
@@ -24,7 +22,8 @@ $ pip install pytm-cli
 
 ```
 C:\Users\chenjiandongx>pytm-cli
-usage: pytm-cli [-i INPUT] [-o OUTPUT] [-d DIRECTION] [-t TYPE] [-v] [-h]
+uusage: pytm-cli [-i INPUT] [-o OUTPUT] [-d DIRECTION] [-t TYPE]
+                    [-I INDENT] [-v] [-h]
 
 树图渲染命令行工具-利用 JSON 数据生成 HTML 格式的树图
 
@@ -36,9 +35,10 @@ optional arguments:
   -d DIRECTION, --direction DIRECTION
                         树图的布局方向, 有 LR/RL/H/TB/BT/V 可选.(默认为 LR)
   -t TYPE, --type TYPE  树图类型, 1.分层树 2.缩进树 3.生态树.(默认为 1)
+  -I INDENT, --indent INDENT
+                        缩进树的缩进量.(默认为 40)
   -v, --version         版本信息
   -h, --help            帮助页面
-
 ```
 
 #### JSON 数据
@@ -140,17 +140,26 @@ A----|                         |
 
 ![](https://github.com/chenjiandongx/pytreemap/blob/master/screenshot/screenshot-5.png)
 
+```pytm-cli -i data.json -t 2 -I 100```
+
+![](https://github.com/chenjiandongx/pytreemap/blob/master/screenshot/screenshot-6.png)
+
 ### 以模块方式使用
 
 ```python
 from pytreemap import render
 
-render(input, direction=None, output=None, type=None)
+render(input,
+       output="TreeMap.html",
+       direction="LR",
+       indent=40,
+       type=None):
 
 :param input: 输入 json 文件路径
 :param direction: 树图方向，有 LR/RL/H/TB/BT/V 可选
 :param output: 输出 html 文件路径
+:param indent: 缩进树缩进量
 :param type: 树图类型
 ```
 
-### MIT 许可证
+### [MIT 许可证](https://github.com/chenjiandongx/pytreemap/blob/master/LICENSE)
